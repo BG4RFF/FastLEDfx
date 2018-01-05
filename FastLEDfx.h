@@ -13,11 +13,19 @@
 
 #define ANIMATOR_DELAY_TIME 5
 
+typedef uint8_t effectState_t;
+enum EffectState {
+	NONE,
+	BEGIN,
+	LOOP
+};
+
 class Effect;
 
 class Animator {
 friend class Effect;
 private:
+	effectState_t effectState;
 	Effect* effect;
 	uint32_t lastEffectCallTime;
 	CRGB* leds;
@@ -36,12 +44,13 @@ public:
 class Effect {
 friend class Animator;
 private:
-	void begin(Animator* animator);
+	void load(Animator* animator);
 public:
 	Effect();
 	virtual ~Effect();
 protected:
 	Animator* animator;
+	virtual void begin();
 	virtual void loop(float dT) = 0;
 };
 
@@ -64,6 +73,7 @@ private:
 public:
 	GlitterEffect(CRGB foreground, CRGB background, fract8 chance);
 	virtual ~GlitterEffect();
+	void begin();
 	void loop(float dT);
 };
 

@@ -13,7 +13,8 @@ Effect::Effect() {
 
 Effect::~Effect() { }
 
-void Effect::begin(Animator* animator) {
+void Effect::load(Animator* animator) {
 	this->animator = animator;
 }
 
+void Effect::begin() { }

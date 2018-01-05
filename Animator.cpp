@@ -9,6 +9,7 @@
 
 Animator::Animator(CRGB* leds, uint16_t numLeds) {
 	this->effect = nullptr;
+	this->effectState = NONE;
 	this->lastEffectCallTime = millis();
 	this->leds = leds;
 	this->numLeds = numLeds;
@@ -33,23 +34,31 @@ float Animator::getDeltaTime() {
 
 void Animator::show(Effect* toLoad) {
 	this->effect = toLoad;
-	effect->begin(this);
+	effect->load(this);
+	effectState = BEGIN;
 	lastEffectCallTime = millis();
 }
 
 void Animator::loop() {
-	if (!effect || !leds) return;
-	effect->loop(getDeltaTime());
-	FastLED.show();
+	if (!effect) return;
+
+	if (effectState == BEGIN) {
+		effectState = LOOP;
+		effect->begin();
+		FastLED.show();
+	} else if (effectState == LOOP) {
+		effect->loop(getDeltaTime());
+		FastLED.show();
+	}
+
 }
 
 void Animator::loopFor(uint32_t msec) {
-	if (!effect || !leds) return;
+	if (!effect) return;
 
 	uint32_t tgtTime = millis() + msec;
 	while (millis() < tgtTime) {
-		effect->loop(getDeltaTime());
-		FastLED.show();
+		loop();
 		delay(ANIMATOR_DELAY_TIME); // limit frame rate - also makes integrators work better
 	}
 }

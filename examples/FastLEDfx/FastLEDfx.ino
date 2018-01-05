@@ -48,20 +48,6 @@ void loop() {
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
 	delay(500);
 
-	SOLID_SINGLE_GLITTER();
-	SOLID_SINGLE();
-	delay(500);
-	SOLID_SINGLE_GLITTER();
-	SOLID_SINGLE();
-	delay(500);
-	SOLID_SINGLE_GLITTER();
-	SOLID_SINGLE();
-	delay(500);
-
-	//make all pixels black)
-	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
-	delay(500);
-
 	RAINBOW_FIXED();
 	delay(3000);
 
@@ -90,38 +76,6 @@ void loop() {
 	RANDOM_PIXELS();
 	delay(1000);
 
-}
-
-//--------------------------------------------------------------------------------
-//--------------------------------Here be effects!--------------------------------
-//--------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-//Add Glitter (taken from the FastLED Example)
-//--------------------------------------------------------------------------------
-void addGlitter(fract8 chanceOfGlitter) {
-	if (random8() < chanceOfGlitter) {
-		leds[random16(NUM_LEDS)] += CRGB::White;
-	}
-}
-
-//--------------------------------------------------------------------------------
-//Show one solid colour.
-//--------------------------------------------------------------------------------
-void SOLID_SINGLE() {
-	fill_solid(leds, NUM_LEDS, CHSV(BASE_HUE, 255, LED_BRIGHTNESS));
-	FastLED.show();
-	delay(DELAY);
-}
-
-//--------------------------------------------------------------------------------
-//Show one solid colour with glitter.
-//--------------------------------------------------------------------------------
-void SOLID_SINGLE_GLITTER() {
-	fill_solid(leds, NUM_LEDS, CHSV(BASE_HUE, 255, LED_BRIGHTNESS));
-	addGlitter(80);
-	FastLED.show();
-	delay(DELAY);
 }
 
 //--------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
  * GlitterEffect.cpp
  *
  *  Created on: 05.01.2018
- *  Author: seze
+ *  Author: fidepus, seze
  */
 
 #include "FastLEDfx.h"
@@ -15,6 +15,10 @@ GlitterEffect::GlitterEffect(CRGB foreground, CRGB background, fract8 chance) {
 }
 
 GlitterEffect::~GlitterEffect() { }
+
+void GlitterEffect::begin() {
+	fill_solid(animator->ledData(), animator->ledCount(), background);
+}
 
 void GlitterEffect::loop(float dT) {
 
