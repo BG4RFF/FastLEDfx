@@ -1,6 +1,5 @@
 #include <FastLED.h>
-#include "include/fastLEDfx/FastLEDfx.h"
-#include "include/fastLEDfx/effects/solidColor/SolidColorEffect.h"
+#include <FastLEDfx.h>
 
 //Define a few things
 //How many LEDs are there?

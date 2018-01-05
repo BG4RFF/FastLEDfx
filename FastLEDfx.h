@@ -43,4 +43,14 @@ protected:
 	virtual void loop(float dT) = 0;
 };
 
+class SolidColorEffect : public Effect {
+private:
+	CRGB color;
+public:
+	SolidColorEffect(CRGB color);
+	virtual ~SolidColorEffect();
+	void setColor(CRGB color);
+	void loop(float dT);
+};
+
 #endif /* INCLUDE_FASTLEDFX_FASTLEDFX_H_ */

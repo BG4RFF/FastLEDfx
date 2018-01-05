@@ -5,7 +5,7 @@
  *      Author: sezep_000
  */
 
-#include "SolidColorEffect.h"
+#include "FastLEDfx.h"
 
 SolidColorEffect::SolidColorEffect(CRGB color) {
 	this->color = color;
