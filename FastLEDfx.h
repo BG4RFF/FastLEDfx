@@ -20,6 +20,9 @@ enum EffectState {
 	LOOP
 };
 
+extern float fx_linear(float a, float b, float m);
+extern float fx_clamp(float v, float min, float max);
+
 class Effect;
 
 class Animator {
@@ -74,6 +77,18 @@ public:
 	GlitterEffect(CRGB foreground, CRGB background, fract8 chance);
 	virtual ~GlitterEffect();
 	void begin();
+	void loop(float dT);
+};
+
+class ScannerEffect : public Effect {
+private:
+	CRGB foreground;
+	CRGB background;
+	float scanHalfTime;
+	float effectTime;
+public:
+	ScannerEffect(CRGB foreground, CRGB background, float scanTime);
+	virtual ~ScannerEffect();
 	void loop(float dT);
 };
 

@@ -13,11 +13,13 @@
 //How slow should the fade be? Higher=slower
 #define DELAY 100
 
+
 CRGB leds[NUM_LEDS];
 Animator* ledAnimator;
 
 SolidColorEffect* solidColor;
 GlitterEffect* glitter;
+ScannerEffect* scanner;
 
 void setup() {
 	Serial.begin(115200);
@@ -25,9 +27,13 @@ void setup() {
 	ledAnimator = new Animator(leds, NUM_LEDS);
 	solidColor = new SolidColorEffect(CRGB::Red);
 	glitter = new GlitterEffect(CRGB::White, CRGB::Black, 80);
+	scanner = new ScannerEffect(CRGB::Red, CRGB::Black, 2.0f);
 }
 
 void loop() {
+
+	ledAnimator->show(scanner);
+	ledAnimator->loopFor(5000);
 
 	solidColor->setColor(CRGB::Red);
 	ledAnimator->show(solidColor);
@@ -43,6 +49,20 @@ void loop() {
 
 	ledAnimator->show(glitter);
 	ledAnimator->loopFor(5000);
+
+	//make all pixels black)
+	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	delay(500);
+
+	SOLID_SINGLE_GLITTER();
+	SOLID_SINGLE();
+	delay(500);
+	SOLID_SINGLE_GLITTER();
+	SOLID_SINGLE();
+	delay(500);
+	SOLID_SINGLE_GLITTER();
+	SOLID_SINGLE();
+	delay(500);
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
@@ -95,30 +115,6 @@ void RAINBOW_FADE() {
 	for (int h = 0; h < 256; h++) {
 		fill_solid(leds, NUM_LEDS, CHSV(h, 255, LED_BRIGHTNESS));
 		FastLED.show();
-		delay(DELAY);
-	}
-}
-
-//--------------------------------------------------------------------------------
-//It's K.I.T.T.!
-//--------------------------------------------------------------------------------
-void SCANNER() {
-	//make all pixels black)
-	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
-
-	//run in one direction
-	for (int i = 0; i < NUM_LEDS; i++) {
-		leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
-		FastLED.show();
-		leds[i] = CRGB::Black;
-		delay(DELAY);
-	}
-
-	//run back
-	for (int i = (NUM_LEDS) - 1; i >= 0; i--) {
-		leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
-		FastLED.show();
-		leds[i] = CRGB::Black;
 		delay(DELAY);
 	}
 }
