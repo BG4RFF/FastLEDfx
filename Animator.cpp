@@ -50,6 +50,6 @@ void Animator::loopFor(uint32_t msec) {
 	while (millis() < tgtTime) {
 		effect->loop(getDeltaTime());
 		FastLED.show();
-		yield();
+		delay(ANIMATOR_DELAY_TIME); // limit frame rate - also makes integrators work better
 	}
 }

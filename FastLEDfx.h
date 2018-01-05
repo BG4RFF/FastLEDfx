@@ -2,7 +2,7 @@
  * FastLEDfx.h
  *
  *  Created on: 05.01.2018
- *      Author: sezep_000
+ *  Author: seze
  */
 
 #ifndef INCLUDE_FASTLEDFX_FASTLEDFX_H_
@@ -10,6 +10,8 @@
 
 #include <FastLED.h>
 #include <stdint.h>
+
+#define ANIMATOR_DELAY_TIME 5
 
 class Effect;
 
@@ -50,6 +52,18 @@ public:
 	SolidColorEffect(CRGB color);
 	virtual ~SolidColorEffect();
 	void setColor(CRGB color);
+	void loop(float dT);
+};
+
+class GlitterEffect : public Effect {
+private:
+	CRGB foreground;
+	CRGB background;
+	fract8 chance;
+	uint16_t glitterPos;
+public:
+	GlitterEffect(CRGB foreground, CRGB background, fract8 chance);
+	virtual ~GlitterEffect();
 	void loop(float dT);
 };
 

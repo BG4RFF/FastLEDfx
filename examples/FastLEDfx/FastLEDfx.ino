@@ -17,12 +17,14 @@ CRGB leds[NUM_LEDS];
 Animator* ledAnimator;
 
 SolidColorEffect* solidColor;
+GlitterEffect* glitter;
 
 void setup() {
 	Serial.begin(115200);
 	FastLED.addLeds<WS2811, DATA_PIN>(leds, NUM_LEDS);
 	ledAnimator = new Animator(leds, NUM_LEDS);
 	solidColor = new SolidColorEffect(CRGB::Red);
+	glitter = new GlitterEffect(CRGB::White, CRGB::Black, 80);
 }
 
 void loop() {
@@ -38,6 +40,9 @@ void loop() {
 	solidColor->setColor(CRGB::Blue);
 	ledAnimator->show(solidColor);
 	ledAnimator->loopFor(750);
+
+	ledAnimator->show(glitter);
+	ledAnimator->loopFor(5000);
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
