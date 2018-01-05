@@ -50,5 +50,6 @@ void Animator::loopFor(uint32_t msec) {
 	while (millis() < tgtTime) {
 		effect->loop(getDeltaTime());
 		FastLED.show();
+		yield();
 	}
 }
