@@ -63,6 +63,13 @@ CRGB leds[NUM_LEDS];
     fill_solid (leds, NUM_LEDS, CHSV(0,0,0));
     delay(500);
 
+    RANDOM_PIXELS();
+    delay(1000);
+    RANDOM_PIXELS();
+    delay(1000);
+    RANDOM_PIXELS();
+    delay(1000);
+
     }
 
 //--------------------------------------------------------------------------------
@@ -133,7 +140,7 @@ CRGB leds[NUM_LEDS];
 
   //run in one direction
   for(int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CHSV(BASE_HUE, 255, 255);
+    leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
     FastLED.show(); 
     leds[i] = CRGB::Black;
     delay(DELAY);
@@ -141,11 +148,25 @@ CRGB leds[NUM_LEDS];
 
   //run back
   for(int i = (NUM_LEDS)-1; i >= 0; i--) {
-    leds[i] = CHSV(BASE_HUE, 255, 255);
+    leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
     FastLED.show();
     leds[i] = CRGB::Black;
     delay(DELAY);
   }
-  
+  }
+
+
+//--------------------------------------------------------------------------------
+//Fill strip with random pixels.
+//--------------------------------------------------------------------------------
+  void RANDOM_PIXELS()
+  {
+    for(int i = 0; i < NUM_LEDS; i++) 
+    { 
+    int randhue = random(256);
+    leds[i] = CHSV(randhue, 255, LED_BRIGHTNESS);
+    FastLED.show(); 
+    delay(DELAY); 
+    }
   }
 
