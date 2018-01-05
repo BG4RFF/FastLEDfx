@@ -16,4 +16,4 @@ Effects collection for FastLED
 
 [FastLED](https://github.com/FastLED/FastLED) is (c) FastLED.
 
-This is heavily inspired by WS2812fx, which is (c) Harm Aldick. 
+This is heavily inspired by [WS2812fx](https://github.com/kitesurfer1404/WS2812FX), which is (c) Harm Aldick. 
