@@ -41,6 +41,7 @@ void loop() {
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	FastLED.show();
 	delay(500);
 
 	SOLID_SINGLE_GLITTER();
@@ -55,6 +56,7 @@ void loop() {
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	FastLED.show();
 	delay(500);
 
 	RAINBOW_FIXED();
@@ -62,12 +64,14 @@ void loop() {
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	FastLED.show();
 	delay(500);
 
 	RAINBOW_FADE();
 
 	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	FastLED.show();
 	delay(500);
 
 	SCANNER();
@@ -75,7 +79,17 @@ void loop() {
 	SCANNER();
 
 	//make all pixels black)
+        fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+        FastLED.show();
+        delay(500);
+
+	DOUBLE_SCANNER();
+	DOUBLE_SCANNER();
+	DOUBLE_SCANNER();
+
+	//make all pixels black)
 	fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+	FastLED.show();
 	delay(500);
 
 	RANDOM_PIXELS();
@@ -162,6 +176,36 @@ void SCANNER() {
 		leds[i] = CRGB::Black;
 		delay(DELAY);
 	}
+}
+
+//--------------------------------------------------------------------------------
+//It's double K.I.T.T.!
+//--------------------------------------------------------------------------------
+void DOUBLE_SCANNER() {
+  //make all pixels black)
+  fill_solid(leds, NUM_LEDS, CHSV(0, 0, 0));
+
+  //run in one direction
+  for (int i = 0; i <= NUM_LEDS; i++) {
+    int k = NUM_LEDS - i;
+    leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
+    leds[k] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
+    FastLED.show();
+    leds[i] = CRGB::Black;
+    leds[k] = CRGB::Black;
+    delay(DELAY);
+  }
+
+  //run back
+  for (int i = (NUM_LEDS); i >= 0; i--) {
+    int k = NUM_LEDS - i;
+    leds[i] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
+    leds[k] = CHSV(BASE_HUE, 255, LED_BRIGHTNESS);
+    FastLED.show();
+    leds[i] = CRGB::Black;
+    leds[k] = CRGB::Black;
+    delay(DELAY);
+  }
 }
 
 //--------------------------------------------------------------------------------
