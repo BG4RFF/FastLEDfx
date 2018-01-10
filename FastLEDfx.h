@@ -22,6 +22,7 @@ enum EffectState {
 
 extern float fx_linear(float a, float b, float m);
 extern float fx_clamp(float v, float min, float max);
+extern float fx_wave_tri(float x);
 
 class Effect;
 
@@ -84,7 +85,7 @@ class ScannerEffect : public Effect {
 private:
 	CRGB foreground;
 	CRGB background;
-	float scanHalfTime;
+	float scanTime;
 	float effectTime;
 public:
 	ScannerEffect(CRGB foreground, CRGB background, float scanTime);
